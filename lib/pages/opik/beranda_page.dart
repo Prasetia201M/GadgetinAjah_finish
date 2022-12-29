@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:gadgetinaja/API/object_class/category.dart';
 import 'package:gadgetinaja/homepage/integrate.dart';
 import 'package:gadgetinaja/pages/delvy/produk_page.dart';
-import 'package:gadgetinaja/pages/opik/kategori_page.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:wave_transition/wave_transition.dart';
 
 class Beranda extends StatelessWidget {
   Beranda({
@@ -21,6 +19,11 @@ class Beranda extends StatelessWidget {
   List<DataGetKategoriById> listDataKategori;
   List<ProductsGetKategoriById> listProducts;
   bool nightmode = Storages.getNightMode();
+  static final List<String> imgSlider = [
+    'banner1.png',
+    'banner2.png',
+    'banner3.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,11 @@ class Beranda extends StatelessWidget {
           const Duration(milliseconds: 100),
           () {
             Navigator.pushReplacement(
-              context,
-              PageTransition(type: PageTransitionType.fade, child: const IntegrateAPI(),)
-            );
+                context,
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  child: const IntegrateAPI(),
+                ));
           },
         );
       },
@@ -41,123 +46,22 @@ class Beranda extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 10),
-            //   child: CarouselSlider(
-            //     options: CarouselOptions(
-            //       viewportFraction: 0.9,
-            //       aspectRatio: 3,
-            //       initialPage: 0,
-            //       enableInfiniteScroll: true,
-            //       reverse: false,
-            //       autoPlay: true,
-            //       autoPlayInterval: const Duration(seconds: 5),
-            //       autoPlayAnimationDuration: const Duration(seconds: 1),
-            //       autoPlayCurve: Curves.decelerate,
-            //       enlargeCenterPage: false,
-            //       scrollDirection: Axis.horizontal,
-            //     ),
-            //     items: ['1', '2', '3', '4', '5'].map((i) {
-            //       return GestureDetector(
-            //         onLongPress: () {
-            //           showDialog(
-            //             context: context,
-            //             builder: (context) {
-            //               return AlertDialog(
-            //                   title: Assets.onboarding('gambar$i'));
-            //             },
-            //           );
-            //         },
-            //         child: Container(
-            //           width: MediaQuery.of(context).size.width,
-            //           margin: const EdgeInsets.symmetric(horizontal: 5.0),
-            //           decoration: BoxDecoration(
-            //               color: Warna().icon,
-            //               borderRadius: BorderRadius.circular(10)),
-            //           child: ClipRRect(
-            //               borderRadius: BorderRadius.circular(10),
-            //               child: Assets.onboarding('gambar$i')),
-            //         ),
-            //       );
-            //     }).toList(),
-            //   ),
-            // ),
-
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Kategori',
-                      style: Font.style(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    'Sponsored',
+                    style: Font.style(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: listDataKategori.map(
-                          (kategori) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: KategoriPage(
-                                            id: kategori.id.toString())));
-                              },
-                              child: Tooltip(
-                                message: kategori.name!,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: SizedBox(
-                                    height: 100,
-                                    width: 70,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: Warna().primer,
-                                          backgroundImage: NetworkImage(
-                                            kategori.products!.isNotEmpty
-                                                ? kategori
-                                                    .products!.first.image!
-                                                : "https://media.istockphoto.com/id/1152715842/vector/letter-tt-t-t-icon-logo-vector.jpg?b=1&s=612x612&w=0&k=20&c=OoBteZJSVPC9iaV-hVimZ_kw0J2vKqGJThu8f8LZ8NY=",
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          kategori.name!,
-                                          textAlign: TextAlign.center,
-                                          style: Font.style(fontSize: 10),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.clip,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    ),
+                  Image.asset(
+                    "assets/banner/banner1.png",
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
                   ),
                 ],
               ),
@@ -165,7 +69,7 @@ class Beranda extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10),
               child: Text(
-                'List Produk',
+                'Spesial For You',
                 style: Font.style(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -184,13 +88,11 @@ class Beranda extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                      context,
-                      WaveTransition(
-                        duration: const Duration(milliseconds: 700),
-                        child: ProdukPage(id: listProducts[index].id!),
-                        center: const FractionalOffset(0.5, 0),
-                      ),
-                    );
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.size,
+                            alignment: Alignment.center,
+                            child: ProdukPage(id: listProducts[index].id!)));
                   },
                   child: Container(
                     margin: const EdgeInsets.only(
@@ -199,7 +101,7 @@ class Beranda extends StatelessWidget {
                       right: 10,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(0),
                       boxShadow: [
                         nightmode == false
                             ? BoxShadow(
@@ -212,7 +114,7 @@ class Beranda extends StatelessWidget {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(0),
                         color: Warna().primerCard,
                       ),
                       child: Column(
@@ -231,7 +133,7 @@ class Beranda extends StatelessWidget {
                               );
                             },
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(0),
                               child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Image.network(

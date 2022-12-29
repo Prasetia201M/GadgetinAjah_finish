@@ -49,4 +49,5 @@ class Assets {
       fit: BoxFit.cover,
     );
   }
+
 }

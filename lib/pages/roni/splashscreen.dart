@@ -36,7 +36,8 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
       backgroundColor: Warna().first,
       body: SafeArea(
-        child: Container(
+        child: 
+        Container(
           margin: const EdgeInsets.all(30),
           padding: const EdgeInsets.all(50),
           child: Column(

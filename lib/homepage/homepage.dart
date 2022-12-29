@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:badges/badges.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -13,7 +12,6 @@ import 'package:gadgetinaja/pages/opik/splash_login.dart';
 import 'package:gadgetinaja/pages/opik/wishlist_page.dart';
 import 'package:gadgetinaja/pages/delvy/pesanan_page.dart';
 import 'package:gadgetinaja/pages/yozi/profile_page.dart';
-import 'package:gadgetinaja/pages/opik/search_page.dart';
 import 'package:gadgetinaja/services/icon_assets.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
@@ -56,53 +54,54 @@ class _HomePageState extends State<HomePage> {
                 title: Tooltip(
                     message: 'GadgetinAja', child: Assets.logo(width: 130)),
                 actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.size,
-                            alignment: Alignment.bottomCenter,
-                            child: SearchPage(
-                              listProducts: widget.listProducts,
-                            ),
-                          ));
-                    },
-                    child: Tooltip(
-                        message: 'Cari Produk',
-                        child: Assets.appbarIcon('search', width: 25)),
-                  ),
-                  const SizedBox(
-                    width: 17,
-                  ),
-                  nama.isNotEmpty && cart.cart != 0
-                      ? Badge(
-                          badgeColor: Warna().font,
-                          position: BadgePosition.topEnd(
-                            top: 5,
-                            end: -5,
-                          ),
-                          badgeContent: Text(
-                            cart.cart.toString(),
-                            // Storages.getLengthCart().toString(),
-                            style: Font.style(color: Warna().primer),
-                          ),
-                          child: GestureDetector(
-                            onTap: () async {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.scale,
-                                    alignment: Alignment.bottomCenter,
-                                    child: const Keranjang(),
-                                  ));
-                            },
-                            child: Tooltip(
-                                message: 'Cart',
-                                child: Assets.appbarIcon('cart')),
-                          ),
-                        )
-                      : GestureDetector(
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         PageTransition(
+                  //           type: PageTransitionType.size,
+                  //           alignment: Alignment.bottomCenter,
+                  //           child: SearchPage(
+                  //             listProducts: widget.listProducts,
+                  //           ),
+                  //         ));
+                  //   },
+                  //   child: Tooltip(
+                  //       message: 'Cari Produk',
+                  //       child: Assets.appbarIcon('search', width: 25)),
+                  // ),
+                  // const SizedBox(
+                  //   width: 17,
+                  // ),
+                  // nama.isNotEmpty && cart.cart != 0
+                  //     ? Badge(
+                  //         badgeColor: Warna().font,
+                  //         position: BadgePosition.topEnd(
+                  //           top: 5,
+                  //           end: -5,
+                  //         ),
+                  //         badgeContent: Text(
+                  //           cart.cart.toString(),
+                  //           // Storages.getLengthCart().toString(),
+                  //           style: Font.style(color: Warna().primer),
+                  //         ),
+                  //         child: GestureDetector(
+                  //           onTap: () async {
+                  //             Navigator.push(
+                  //                 context,
+                  //                 PageTransition(
+                  //                   type: PageTransitionType.scale,
+                  //                   alignment: Alignment.bottomCenter,
+                  //                   child: const Keranjang(),
+                  //                 ));
+                  //           },
+                  //           child: Tooltip(
+                  //               message: 'Cart',
+                  //               child: Assets.appbarIcon('cart')),
+                  //         ),
+                  //       )
+                  //     : 
+                      GestureDetector(
                           onTap: () async {
                             Navigator.push(
                                 context,
@@ -185,7 +184,6 @@ class _HomePageState extends State<HomePage> {
                   Expanded(child: Container()),
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(0),
                       color: Warna().primerCard,
                       boxShadow: [
                         nightmode == false
