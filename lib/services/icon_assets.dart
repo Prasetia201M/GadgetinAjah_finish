@@ -20,7 +20,7 @@ class Assets {
 
   static Image logo({double? width}) {
     return Image.asset(
-      'assets/logo/logo_thrilogic.png',
+      'assets/logo/logo_gadgetinaja.png',
       width: width,
     );
   }

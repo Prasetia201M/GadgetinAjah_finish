@@ -7,8 +7,8 @@ import 'package:gadgetinaja/services/local_storages.dart';
 
 class Warna {
   bool nightmode = Storages.getNightMode();
-  Color get terang => const Color.fromRGBO(255, 110, 42, 1);
-  Color get first => const Color.fromRGBO(166, 87, 55, 1);
+  Color get terang => Color(0xFF112138);
+  Color get first => Color(0xFF112138);
   Color get second => const Color.fromARGB(255, 147, 128, 128);
 
   Color get primer => nightmode == false
@@ -24,8 +24,8 @@ class Warna {
       : const Color.fromARGB(255, 180, 180, 180);
 
   Color get icon => nightmode == false
-      ? const Color.fromRGBO(166, 87, 55, 1)
-      : const Color.fromRGBO(255, 110, 42, 1);
+      ? const Color(0xFF112138)
+      : const Color(0xFF112138);
 
   Color get shadow => nightmode == false
       ? const Color.fromARGB(255, 206, 206, 206)

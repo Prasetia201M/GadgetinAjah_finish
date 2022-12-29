@@ -74,7 +74,8 @@ class JsonFuture {
   }
 
   Future<GetBarang> getBarang() async {
-    final response = await http.get(Uri.parse('$baseUrl/api/barang'), headers: {
+    final response = await http.get(Uri.parse('$baseUrl/api/barang'), 
+    headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',

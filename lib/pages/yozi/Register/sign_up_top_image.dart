@@ -15,18 +15,17 @@ class SignUpScreenTopImage extends StatelessWidget {
         Assets.logo(
           width: MediaQuery.of(context).size.width / 2,
         ),
-        const SizedBox(height: defaultPadding),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Text(
-            "Silakan masukan alamat email kamu dan buat kata sandi",
+            "Register Page",
             textAlign: TextAlign.center,
-            style: Font.style(fontSize: 16),
+            style: Font.style(fontSize: 16, fontWeight: FontWeight.bold),
             maxLines: 2,
             overflow: TextOverflow.clip,
           ),
         ),
-        const SizedBox(height: defaultPadding * 3),
+        const SizedBox(height: defaultPadding),
       ],
     );
   }

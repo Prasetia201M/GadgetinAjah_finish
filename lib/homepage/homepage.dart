@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:badges/badges.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 elevation: 0,
                 backgroundColor: Warna().first,
                 title: Tooltip(
-                    message: 'Logo ThriLogic', child: Assets.logo(width: 130)),
+                    message: 'GadgetinAja', child: Assets.logo(width: 130)),
                 actions: [
                   GestureDetector(
                     onTap: () {
@@ -119,39 +118,40 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                           child: Tooltip(
-                              message: 'Keranjang',
+                              message: 'Cart',
                               child: Assets.appbarIcon('cart', width: 25)),
                         ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Tooltip(
-                    message: "Night Mode / Light Mode",
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: DayNightSwitcherIcon(
-                        isDarkModeEnabled: nightmode,
-                        onStateChanged: (isDarkModeEnabled) async {
-                          await Storages().setNightMode(
-                            nightMode: nightmode == false ? true : false,
-                          );
-                          Navigator.pushReplacement(
-                            context,
-                            WaveTransition(
-                              duration: const Duration(milliseconds: 500),
-                              child: HomePage(
-                                listProducts: widget.listProducts,
-                                listDataKategori: widget.listDataKategori,
-                                getkeranjang: widget.getkeranjang,
-                                selectedIndex: widget.selectedIndex,
-                              ),
-                              center: const FractionalOffset(0.9, 0.0),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                  // Tooltip(
+                  //   message: "Night Mode / Light Mode",
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8),
+                  //     child: DayNightSwitcherIcon(
+                  //       isDarkModeEnabled: nightmode,
+                  //       onStateChanged: (isDarkModeEnabled) async {
+                  //         await Storages().setNightMode(
+                  //           nightMode: nightmode == false ? true : false,
+                  //         );
+                  //         Navigator.pushReplacement(
+                  //           context,
+                  //           WaveTransition(
+                  //             duration: const Duration(milliseconds: 500),
+                  //             child: HomePage(
+                  //               listProducts: widget.listProducts,
+                  //               listDataKategori: widget.listDataKategori,
+                  //               getkeranjang: widget.getkeranjang,
+                  //               selectedIndex: widget.selectedIndex,
+                  //             ),
+                  //             center: const FractionalOffset(0.9, 0.0),
+                  //           ),
+                  //         );
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                
                 ],
               ),
         body: DoubleBack(

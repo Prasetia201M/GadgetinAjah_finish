@@ -55,6 +55,8 @@ dependencies:
   double_back_to_close: ^2.0.0
   translator: ^0.1.7
   search_page: ^2.2.0
+  page_transition: "^2.0.9"
+
 
 dev_dependencies:
   flutter_test:
@@ -65,10 +67,10 @@ dev_dependencies:
 flutter_app_name:
   name: "GadgetinAja"
 
-flutter_icons:
-  android: "icon_app"
-  ios: true
-  image_path: "assets/logo/logo_update.png"
+# flutter_icons:
+#   android: "icon_app"
+#   ios: true
+#   image_path: "assets/logo/logo_update.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

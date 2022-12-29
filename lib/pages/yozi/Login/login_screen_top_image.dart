@@ -23,15 +23,17 @@ class LoginScreenTopImage extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: defaultPadding),
-        Text(
-          "Silakan masukan alamat email kamu dan masukan kata sandi",
-          textAlign: TextAlign.center,
-          style: Font.style(fontSize: 16),
-          maxLines: 2,
-          overflow: TextOverflow.clip,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Text(
+            "Login Page",
+            textAlign: TextAlign.center,
+            style: Font.style(fontSize: 16, fontWeight: FontWeight.bold),
+            maxLines: 2,
+            overflow: TextOverflow.clip,
+          ),
         ),
-        const SizedBox(height: defaultPadding * 3),
+        const SizedBox(height: defaultPadding),
       ],
     );
   }

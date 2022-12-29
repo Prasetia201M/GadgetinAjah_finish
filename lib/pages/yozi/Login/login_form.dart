@@ -8,6 +8,7 @@ import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
 //import 'package:gadgetinaja/homepage/homepage.dart';
 import 'package:gadgetinaja/pages/yozi/register_page.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:wave_transition/wave_transition.dart';
 import '../../../services/already_have_an_account_acheck.dart';
 import 'package:gadgetinaja/services/icon_assets.dart';
@@ -58,9 +59,9 @@ class _LoginFormState extends State<LoginForm> {
             },
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
               ),
-              hintText: "Masukan email kamu",
+              hintText: "Email",
               hintStyle: Font.style(fontSize: 16, color: Colors.grey),
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
@@ -84,9 +85,9 @@ class _LoginFormState extends State<LoginForm> {
               },
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                hintText: "Masukan password",
+                hintText: "Password",
                 hintStyle: Font.style(fontSize: 16, color: Colors.grey),
                 suffixIcon: GestureDetector(
                   onTap: () {
@@ -124,7 +125,7 @@ class _LoginFormState extends State<LoginForm> {
                   Navigator.pushReplacement(
                     context,
                     WaveTransition(
-                      duration: const Duration(milliseconds: 700),
+                      duration: const Duration(milliseconds: 100),
                       child: const IntegrateAPI(),
                       center: const FractionalOffset(0.5, 0),
                     ),
@@ -152,11 +153,8 @@ class _LoginFormState extends State<LoginForm> {
             press: () {
               Navigator.push(
                 context,
-                WaveTransition(
-                  duration: const Duration(milliseconds: 700),
-                  child: const SignUpScreen(),
-                  center: const FractionalOffset(0.5, 0),
-                ),
+                PageTransition(type: PageTransitionType.leftToRight, child: SignUpScreen())
+                
               );
             },
           ),

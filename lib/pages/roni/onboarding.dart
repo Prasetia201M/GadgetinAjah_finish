@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-import 'package:gadgetinaja/homepage/integrate.dart';
+import 'package:gadgetinaja/pages/yozi/login_page.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
 import 'package:wave_transition/wave_transition.dart';
@@ -15,10 +15,11 @@ class OnBoarding extends StatelessWidget {
     // final Color kDarkBlueColor = Color(0xFF053149);
 
     return OnBoardingSlider(
-      finishButtonText: 'GET STARTED',
+      finishButtonText: 'Mulai',
       finishButtonTextStyle: Font.style(
-        color: Colors.black,
+        color: Colors.white,
         fontSize: 20,
+        fontWeight: FontWeight.bold,
       ),
       indicatorAbove: true,
       onFinish: () async {
@@ -26,14 +27,15 @@ class OnBoarding extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           WaveTransition(
-            duration: const Duration(milliseconds: 700),
-            child: const IntegrateAPI(),
+            duration: const Duration(milliseconds: 500),
+            child: const LoginScreen(),
             center: const FractionalOffset(0.5, 0),
           ),
         );
       },
-      skipTextButton: Text(
-        'Lewati',
+      skipTextButton: 
+      Text(
+        'Skip',
         style: Font.style(
           fontSize: 16,
           color: Colors.white,
@@ -47,7 +49,7 @@ class OnBoarding extends StatelessWidget {
       pageBackgroundColor: Warna().first,
       background: [
         Container(
-          margin: const EdgeInsets.only(top: 130),
+          margin: const EdgeInsets.only(top: 60),
           child:
               lottieAsset('onboard1', width: MediaQuery.of(context).size.width),
         ),
@@ -62,14 +64,14 @@ class OnBoarding extends StatelessWidget {
               lottieAsset('onboard3', width: MediaQuery.of(context).size.width),
         ),
       ],
-      speed: 3,
+      speed: 1,
       pageBodies: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               Expanded(child: Container()),
-              Text('Hi, Selamat Datang !',
+              Text('Selamat Datang !',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w600,
@@ -79,7 +81,7 @@ class OnBoarding extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                  'Dapatkan kemudahan mencari barang kualitas import dengan harga lebih murah hanya di ThriLogic',
+                  'Dapatkan semua gadget berkualisan dan murah di GadgetinAja',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w400,
@@ -98,7 +100,7 @@ class OnBoarding extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(child: Container()),
-              Text('Kapan dan Dimana Saja',
+              Text('Berkualitas dan Lengkap',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w600,
@@ -108,7 +110,7 @@ class OnBoarding extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                  'Tambahkan barang yang di inginkan ke keranjang dan checkout kapanpun kemudian tunggu dirumah ',
+                  'Hanya disini, Semua ada dan juga dijamin berkualitas',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w400,
@@ -127,7 +129,7 @@ class OnBoarding extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(child: Container()),
-              Text('Pengiriman Aman sampai Tujuan',
+              Text('Pengiriman Cepan dan Aman',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w600,
@@ -137,7 +139,7 @@ class OnBoarding extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                  'Selalu siap mengantarkan barang yang kamu pesan dengan aman dan sampai tujuan tepat waktu ',
+                  'Pengiriman memiliki waktu yang cepat dan aman',
                   textAlign: TextAlign.center,
                   style: Font.style(
                       fontWeight: FontWeight.w400,

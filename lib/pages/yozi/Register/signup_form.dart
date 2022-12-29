@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gadgetinaja/API/json_future/json_future.dart';
 import 'package:gadgetinaja/API/object_class/auth.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:wave_transition/wave_transition.dart';
 import '../../../services/already_have_an_account_acheck.dart';
 import 'package:gadgetinaja/services/styles.dart';
@@ -47,9 +48,9 @@ class _SignUpFormState extends State<SignUpForm> {
             style: Font.style(),
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
               ),
-              hintText: "Masukan nama kamu",
+              hintText: "nama",
               hintStyle: Font.style(fontSize: 16, color: Colors.grey),
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
@@ -67,9 +68,9 @@ class _SignUpFormState extends State<SignUpForm> {
               cursorColor: Warna().font,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                hintText: "Masukan No.Tlpn kamu",
+                hintText: "Nomor Telepon",
                 hintStyle: Font.style(fontSize: 16, color: Colors.grey),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
@@ -86,9 +87,9 @@ class _SignUpFormState extends State<SignUpForm> {
             cursorColor: Warna().font,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
               ),
-              hintText: "Masukan email kamu",
+              hintText: "Email",
               hintStyle: Font.style(fontSize: 16, color: Colors.grey),
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
@@ -106,9 +107,9 @@ class _SignUpFormState extends State<SignUpForm> {
               cursorColor: Warna().font,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                hintText: "Masukan password",
+                hintText: "Password",
                 hintStyle: Font.style(fontSize: 16, color: Colors.grey),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(defaultPadding),
@@ -137,9 +138,9 @@ class _SignUpFormState extends State<SignUpForm> {
             cursorColor: Warna().font,
             decoration: InputDecoration(
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(30),
               ),
-              hintText: "Konfirmasi password",
+              hintText: "Konfirmasi Password",
               hintStyle: Font.style(fontSize: 16, color: Colors.grey),
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
@@ -209,11 +210,7 @@ class _SignUpFormState extends State<SignUpForm> {
             press: () {
               Navigator.pushReplacement(
                 context,
-                WaveTransition(
-                  duration: const Duration(milliseconds: 700),
-                  center: const FractionalOffset(0.9, 0.0),
-                  child: const LoginScreen(),
-                ),
+                PageTransition(type: PageTransitionType.rightToLeft, child: LoginScreen())
               );
             },
           ),
