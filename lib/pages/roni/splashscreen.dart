@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gadgetinaja/pages/yozi/login_page.dart';
+import 'package:gadgetinaja/homepage/integrate.dart';
 import 'package:gadgetinaja/services/icon_assets.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen>
                             type: PageTransitionType.fade,
                             child: Storages.getIntroSlider() == false
                                 ? const OnBoarding()
-                                : const LoginScreen(),
+                                : const IntegrateAPI(),
                           ));
                     });
                 }),

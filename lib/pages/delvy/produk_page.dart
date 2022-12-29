@@ -1,11 +1,10 @@
 // ignore_for_file: must_be_immutable, use_build_context_synchronously
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:gadgetinaja/API/json_future/json_future.dart';
 import 'package:gadgetinaja/API/object_class/barang.dart';
-import 'package:gadgetinaja/API/object_class/category.dart';
 import 'package:gadgetinaja/API/object_class/keranjang.dart';
 import 'package:gadgetinaja/pages/delvy/create_produk_page.dart';
 import 'package:gadgetinaja/pages/delvy/keranjang_page.dart';
@@ -100,19 +99,6 @@ class _ProdukPage extends State<ProdukPage> {
                                       BackButton(
                                         color: Warna().icon,
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(),
-                                          Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: WishlistAdd(
-                                              id: widget.id,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     ],
                                   ),
                                 )
@@ -129,40 +115,39 @@ class _ProdukPage extends State<ProdukPage> {
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: Text(
-                                          databarang.name!,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          style: Font.style(
-                                              fontWeight: FontWeight.bold,
-                                              color: Warna().font,
-                                              fontSize: 20),
-                                        ),
-                                      ),
                                       Text(
-                                        rupiah(databarang.harga!),
+                                        databarang.name!,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
                                         style: Font.style(
                                             fontWeight: FontWeight.bold,
                                             color: Warna().font,
-                                            fontSize: 20),
+                                            fontSize: 25),
+                                      ),
+                                      WishlistAdd(
+                                        id: widget.id,
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 10),
-                                  ReviewStar(
-                                    id: widget.id,
+                                  Text(
+                                    rupiah(databarang.harga!),
+                                    style: Font.style(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amber,
+                                        fontSize: 20),
                                   ),
-                                  const SizedBox(height: 30),
+                                  const SizedBox(height: 20),
                                   Text(
                                     "Detail Produk",
                                     style: Font.style(
                                         fontWeight: FontWeight.bold,
                                         color: Warna().font,
                                         fontSize: 18),
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                    thickness: 1,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -180,6 +165,13 @@ class _ProdukPage extends State<ProdukPage> {
                                           ),
                                           Text(
                                             "Kategori",
+                                            maxLines: 5,
+                                            style: Font.style(
+                                                color: Warna().font,
+                                                fontSize: 15),
+                                          ),
+                                          Text(
+                                            "Rating",
                                             maxLines: 5,
                                             style: Font.style(
                                                 color: Warna().font,
@@ -206,11 +198,26 @@ class _ProdukPage extends State<ProdukPage> {
                                                 color: Warna().font,
                                                 fontSize: 15),
                                           ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                ":",
+                                                maxLines: 5,
+                                                style: Font.style(
+                                                    color: Warna().font,
+                                                    fontSize: 15),
+                                              ),
+                                              ReviewStar(
+                                                id: widget.id,
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 30),
+                                  const SizedBox(height: 20),
                                   Text(
                                     "Deskripsi Produk",
                                     style: Font.style(
@@ -218,187 +225,23 @@ class _ProdukPage extends State<ProdukPage> {
                                         color: Warna().font,
                                         fontSize: 18),
                                   ),
+                                  Divider(
+                                    color: Colors.black,
+                                    thickness: 1,
+                                  ),
                                   GestureDetector(
                                     onTap: () =>
                                         modalbottom(context, databarang),
                                     child: Text(
                                       databarang.deskripsi!,
                                       textAlign: TextAlign.justify,
-                                      maxLines: 5,
                                       overflow: TextOverflow.fade,
                                       style: Font.style(
                                           color: Warna().font, fontSize: 15),
                                     ),
                                   ),
-                                  GestureDetector(
-                                    onTap: () =>
-                                        modalbottom(context, databarang),
-                                    child: Text(
-                                      "Baca selengkapnya...",
-                                      style: Font.style(
-                                        fontSize: 12,
-                                        color: Warna().icon,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 25),
-                                  Text(
-                                    "Rekomendasi Produk",
-                                    style: Font.style(
-                                        fontWeight: FontWeight.bold,
-                                        color: Warna().font,
-                                        fontSize: 18),
-                                  ),
                                   const SizedBox(height: 25),
                                 ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: FutureBuilder<GetKategoriById>(
-                                future: JsonFuture().getKategoriById(
-                                    id: databarang.categoryId!.toString()),
-                                builder: (context, snapshotbyId) {
-                                  if (snapshotbyId.hasData &&
-                                      snapshotbyId.connectionState !=
-                                          ConnectionState.waiting &&
-                                      snapshotbyId.data != null &&
-                                      snapshotbyId.data!.data != null) {
-                                    DataGetKategoriById datakategori =
-                                        snapshotbyId.data!.data!;
-                                    List<ProductsGetKategoriById> listproducts =
-                                        datakategori.products!;
-                                    listproducts.shuffle();
-                                    return GridView.builder(
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount: listproducts.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 10 / 16,
-                                      ),
-                                      itemBuilder: (context, index) {
-                                        ProductsGetKategoriById
-                                            productsGetKategoriById =
-                                            datakategori.products![index];
-                                        return GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              WaveTransition(
-                                                duration: const Duration(
-                                                    milliseconds: 700),
-                                                child: ProdukPage(
-                                                    id: productsGetKategoriById
-                                                        .id!),
-                                                center: const FractionalOffset(
-                                                    0.5, 0),
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                              bottom: 20,
-                                              left: 10,
-                                              right: 10,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              boxShadow: [
-                                                nightmode == false
-                                                    ? BoxShadow(
-                                                        blurRadius: 4,
-                                                        color: Warna().shadow,
-                                                        offset:
-                                                            const Offset(2, 4),
-                                                      )
-                                                    : const BoxShadow(),
-                                              ],
-                                            ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                color: Warna().primerCard,
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    child: AspectRatio(
-                                                      aspectRatio: 1,
-                                                      child: Image.network(
-                                                        productsGetKategoriById
-                                                            .image!,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                        left: 10,
-                                                        right: 10,
-                                                        top: 5,
-                                                        bottom: 10,
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            productsGetKategoriById
-                                                                .name!,
-                                                            style: Font.style(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            maxLines: 2,
-                                                          ),
-                                                          ReviewStar(
-                                                            id: productsGetKategoriById
-                                                                .id!,
-                                                          ),
-                                                          AutoSizeText(
-                                                            rupiah(
-                                                                productsGetKategoriById
-                                                                    .harga!),
-                                                            style: Font.style(
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                            ),
-                                                            maxLines: 1,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
                               ),
                             ),
                           ],
@@ -670,7 +513,7 @@ class _PlusMinusState extends State<PlusMinus> {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Text(
                 counter.toString(),
-                style: Font.style(fontSize: 20, fontWeight: FontWeight.w500),
+                style: Font.style(fontSize: 30, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -698,13 +541,11 @@ class _PlusMinusState extends State<PlusMinus> {
               onPressed: () async {
                 if (nama.isEmpty) {
                   Navigator.push(
-                    context,
-                    WaveTransition(
-                      duration: const Duration(milliseconds: 700),
-                      child: const SplashLogin(navigate: true),
-                      center: const FractionalOffset(0.5, 0),
-                    ),
-                  );
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        child: const SplashLogin(navigate: true),
+                      ));
                 } else {
                   CreateKeranjang keranjang =
                       await JsonFuture().createKeranjang(
@@ -720,13 +561,11 @@ class _PlusMinusState extends State<PlusMinus> {
                   if (keranjang.code == '00') {
                     cart.addcart = 1;
                     Navigator.push(
-                      context,
-                      WaveTransition(
-                        duration: const Duration(milliseconds: 700),
-                        child: const Keranjang(),
-                        center: const FractionalOffset(0.5, 0),
-                      ),
-                    );
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: const Keranjang(),
+                        ));
                   }
                 }
               },
