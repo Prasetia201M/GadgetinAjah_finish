@@ -67,6 +67,10 @@ dev_dependencies:
 flutter_app_name:
   name: "GadgetinAja"
 
+flutter_icons:
+  android: "icon_app"
+  ios: true
+  image_path: "assets/logo/logo_update.png"
 # flutter_icons:
 #   android: "icon_app"
 #   ios: true

@@ -3,6 +3,7 @@
 import 'package:badges/badges.dart';
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:gadgetinaja/API/object_class/category.dart';
 import 'package:gadgetinaja/API/object_class/keranjang.dart';
@@ -16,7 +17,6 @@ import 'package:gadgetinaja/pages/opik/search_page.dart';
 import 'package:gadgetinaja/services/icon_assets.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
-import 'package:wave_transition/wave_transition.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -59,15 +59,14 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        WaveTransition(
-                          duration: const Duration(milliseconds: 700),
-                          center: const FractionalOffset(0.9, 0.0),
-                          child: SearchPage(
-                            listProducts: widget.listProducts,
-                          ),
-                        ),
-                      );
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.size,
+                            alignment: Alignment.bottomCenter,
+                            child: SearchPage(
+                              listProducts: widget.listProducts,
+                            ),
+                          ));
                     },
                     child: Tooltip(
                         message: 'Cari Produk',
@@ -91,31 +90,29 @@ class _HomePageState extends State<HomePage> {
                           child: GestureDetector(
                             onTap: () async {
                               Navigator.push(
-                                context,
-                                WaveTransition(
-                                  duration: const Duration(milliseconds: 700),
-                                  child: const Keranjang(),
-                                  center: const FractionalOffset(0.9, 0.0),
-                                ),
-                              );
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.scale,
+                                    alignment: Alignment.bottomCenter,
+                                    child: const Keranjang(),
+                                  ));
                             },
                             child: Tooltip(
-                                message: 'Keranjang',
+                                message: 'Cart',
                                 child: Assets.appbarIcon('cart')),
                           ),
                         )
                       : GestureDetector(
                           onTap: () async {
                             Navigator.push(
-                              context,
-                              WaveTransition(
-                                duration: const Duration(milliseconds: 700),
-                                child: nama.isNotEmpty
-                                    ? Keranjang()
-                                    : SplashLogin(navigate: true),
-                                center: const FractionalOffset(0.9, 0.0),
-                              ),
-                            );
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.size,
+                                  alignment: Alignment.bottomCenter,
+                                  child: nama.isNotEmpty
+                                      ? Keranjang()
+                                      : SplashLogin(navigate: true),
+                                ));
                           },
                           child: Tooltip(
                               message: 'Cart',
@@ -151,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                   //     ),
                   //   ),
                   // ),
-                
                 ],
               ),
         body: DoubleBack(
@@ -188,10 +184,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(child: Container()),
                   Container(
-                    margin:
-                        const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
+                      borderRadius: BorderRadius.circular(0),
                       color: Warna().primerCard,
                       boxShadow: [
                         nightmode == false
