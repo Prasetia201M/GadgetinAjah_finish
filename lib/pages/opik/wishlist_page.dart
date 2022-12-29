@@ -47,12 +47,12 @@ class _WishListState extends State<WishList> {
                         physics: const BouncingScrollPhysics(),
                         children: [
                           SizedBox(
-                            height: 100,
+                            height: 60,
                             child: Center(
                               child: Text(
-                                "WISHLIST",
+                                "Wishlist Page",
                                 style: Font.style(
-                                    fontSize: 22, fontWeight: FontWeight.w500),
+                                    fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

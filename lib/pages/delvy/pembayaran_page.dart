@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:gadgetinaja/API/json_future/json_future.dart';
 import 'package:gadgetinaja/API/object_class/category.dart';
@@ -34,7 +35,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          "Pembayaran",
+          "Checkout",
           style: Font.style(color: Colors.white),
         ),
         backgroundColor: Warna().first,
@@ -48,23 +49,129 @@ class _PembayaranPageState extends State<PembayaranPage> {
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    const SizedBox(height: 20),
                     Container(
                       margin: const EdgeInsets.only(left: 10.0, right: 10.0),
                       padding: const EdgeInsets.all(20),
                       width: double.maxFinite,
-                      // height: 200,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Warna().primerCard,
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black.withAlpha(50),
-                              blurRadius: 2.0),
+                            color: Colors.black.withAlpha(50),
+                            blurRadius: 2.0,
+                          ),
                         ],
                       ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    WaveTransition(
+                                      duration:
+                                          const Duration(milliseconds: 700),
+                                      child: ListAlamatPage(
+                                          dataKeranjang: widget.dataKeranjang,
+                                          total: widget.total),
+                                      center: const FractionalOffset(0.5, 0),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Alamat",
+                                  style: Font.style(
+                                    fontWeight: FontWeight.bold,
+                                    color: Warna().font,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                child: Assets.lainnyaIcon("edit"),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(type: PageTransitionType.fade, child: ListAlamatPage(
+                                          dataKeranjang: widget.dataKeranjang,
+                                          total: widget.total),)
+                                    
+                                  );
+                                },
+                              )
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageTransition(type: PageTransitionType.fade, child: ListAlamatPage(
+                                    dataKeranjang: widget.dataKeranjang,
+                                    total: widget.total),)
+                              );
+                            },
+                            child: Text(
+                              Storages.getAlamat().isNotEmpty
+                                  ? Storages.getAlamat()
+                                  : "Pilih Alamat",
+                              style: Font.style(
+                                // fontWeight: FontWeight.bold,
+                                color: Storages.getAlamat().isNotEmpty
+                                    ? Warna().font
+                                    : Warna().terang,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                          
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      padding: const EdgeInsets.all(20),
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Warna().primerCard,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withAlpha(50),
+                            blurRadius: 2.0,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Info Order",
+                                style: Font.style(
+                                  fontWeight: FontWeight.bold,
+                                  color: Warna().font,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              
+                            ],
+                          ),
+                          Container(
+                      // height: 200,
+                      
                       child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -144,161 +251,47 @@ class _PembayaranPageState extends State<PembayaranPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                      padding: const EdgeInsets.all(20),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Warna().primerCard,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(50),
-                            blurRadius: 2.0,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    WaveTransition(
-                                      duration:
-                                          const Duration(milliseconds: 700),
-                                      child: ListAlamatPage(
-                                          dataKeranjang: widget.dataKeranjang,
-                                          total: widget.total),
-                                      center: const FractionalOffset(0.5, 0),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  "Alamat",
-                                  style: Font.style(
-                                    fontWeight: FontWeight.bold,
-                                    color: Warna().font,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                child: Assets.lainnyaIcon("edit"),
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    WaveTransition(
-                                      duration:
-                                          const Duration(milliseconds: 700),
-                                      child: ListAlamatPage(
-                                          dataKeranjang: widget.dataKeranjang,
-                                          total: widget.total),
-                                      center: const FractionalOffset(0.5, 0),
-                                    ),
-                                  );
-                                },
-                              )
-                            ],
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                WaveTransition(
-                                  duration: const Duration(milliseconds: 700),
-                                  child: ListAlamatPage(
-                                    dataKeranjang: widget.dataKeranjang,
-                                    total: widget.total,
-                                  ),
-                                  center: const FractionalOffset(0.5, 0),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              Storages.getAlamat().isNotEmpty
-                                  ? Storages.getAlamat()
-                                  : "Pilih Alamat",
-                              style: Font.style(
-                                // fontWeight: FontWeight.bold,
-                                color: Storages.getAlamat().isNotEmpty
-                                    ? Warna().font
-                                    : Warna().terang,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
+                    
                           const SizedBox(height: 20),
-                          Text(
-                            "Pengiriman",
-                            style: Font.style(
-                              fontWeight: FontWeight.bold,
-                              color: Warna().font,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
-                            "Reguler - MeTiR Fast",
-                            style: Font.style(
-                              // fontWeight: FontWeight.bold,
-                              color: Warna().font,
-                              fontSize: 15,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Text(
-                            "Pembayaran",
-                            style: Font.style(
-                              fontWeight: FontWeight.bold,
-                              color: Warna().font,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
-                            "Bank Negara Indonesia - BNI",
-                            style: Font.style(
-                              // fontWeight: FontWeight.bold,
-                              color: Warna().font,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Container(
-                      margin: const EdgeInsets.only(left: 10.0, right: 10.0),
-                      padding: const EdgeInsets.all(20),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Warna().primerCard,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(50),
-                            blurRadius: 2.0,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Info Order",
+                                "Pengiriman",
                                 style: Font.style(
-                                  fontWeight: FontWeight.bold,
                                   color: Warna().font,
-                                  fontSize: 20,
+                                      fontSize: 15,
                                 ),
                               ),
+                              Text(
+                            "SiKilat Express",
+                            style: Font.style(
+                              fontWeight: FontWeight.bold,
+                              color: Warna().font,
+                              fontSize: 15,
+                            ),
+                          ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Pembayaran",
+                                style: Font.style(
+                                  color: Warna().font,
+                                      fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                            "COD",
+                            style: Font.style(
+                              fontWeight: FontWeight.bold,
+                              color: Warna().font,
+                              fontSize: 15,
+                            ),
+                          ),
                             ],
                           ),
                           const SizedBox(height: 10),
@@ -416,7 +409,6 @@ class _PembayaranPageState extends State<PembayaranPage> {
               Expanded(child: Container()),
               Container(
                 width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextButton(
                   onPressed: () async {
                     if (Storages.getAlamat().isNotEmpty) {
@@ -433,11 +425,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
                         // await Storages().setLengthCart(jumlah: 0);
                         Navigator.pushReplacement(
                           context,
-                          WaveTransition(
-                            duration: const Duration(milliseconds: 700),
-                            child: const Keranjang(),
-                            center: const FractionalOffset(0.5, 0),
-                          ),
+                          PageTransition(type: PageTransitionType.fade, child: Keranjang(),)
                         );
                       }
                     } else {
@@ -447,11 +435,7 @@ class _PembayaranPageState extends State<PembayaranPage> {
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Warna().icon),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
+                    
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -461,9 +445,6 @@ class _PembayaranPageState extends State<PembayaranPage> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
               ),
             ],
           ),

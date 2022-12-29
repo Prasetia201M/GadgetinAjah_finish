@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:gadgetinaja/API/json_future/json_future.dart';
-import 'package:gadgetinaja/API/object_class/category.dart';
 import 'package:gadgetinaja/pages/delvy/pembayaran_page.dart';
 import 'package:gadgetinaja/pages/delvy/produk_page.dart';
 import 'package:gadgetinaja/services/styles.dart';
@@ -33,7 +33,7 @@ class _KeranjangState extends State<Keranjang> {
           ),
           elevation: 0,
           title: Text(
-            "Keranjang",
+            "Cart Page",
             style: Font.style(color: Colors.white),
           ),
           backgroundColor: Warna().first,
@@ -68,25 +68,71 @@ class _KeranjangState extends State<Keranjang> {
                               child: ListView(
                                 physics: const BouncingScrollPhysics(),
                                 children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Padding(
+                                  Container(
+                                    color: Color.fromARGB(255, 251, 245, 220),
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Align(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "Total Keranjang ( ${datakeranjang.length} )",
-                                        style: Font.style(
-                                            fontWeight: FontWeight.bold,
-                                            color: Warna().font,
-                                            fontSize: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.delivery_dining,
+                                            color: Colors.red,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 30),
+                                            child: Text(
+                                              "Dapatkan Cashback Hingga 100% Ketika Pembelian 10 Produk!",
+                                              style: Font.style(
+                                                  color: Colors.red,
+                                                  fontSize: 10),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
+                                  // const SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(left: 15),
+                                  //   child: Align(
+                                  //     alignment: Alignment.centerLeft,
+                                  //     child: Row(
+                                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  //       children: [
+                                  //         Text(
+                                  //           "Total Keranjang",
+                                  //           style: Font.style(
+                                  //               fontWeight: FontWeight.bold,
+                                  //               color: Warna().font,
+                                  //               fontSize: 20),
+                                  //         ),
+                                  //         Padding(
+                                  //           padding: const EdgeInsets.only(right: 30),
+                                  //           child: Text(
+                                  //             "${datakeranjang.length}",
+                                  //             style: Font.style(
+                                  //                 fontWeight: FontWeight.bold,
+                                  //                 color: Warna().font,
+                                  //                 fontSize: 20),
+                                  //           ),
+                                  //         ),
+
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 10,
+                                  // ),
                                   ListView.builder(
                                       shrinkWrap: true,
                                       physics:
@@ -111,15 +157,6 @@ class _KeranjangState extends State<Keranjang> {
                                             );
                                           },
                                           child: Card(
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 10,
-                                              vertical: 2,
-                                            ),
-                                            elevation: 5,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
                                             color: Warna().primerCard,
                                             shadowColor: Warna().shadow,
                                             child: Padding(
@@ -172,54 +209,21 @@ class _KeranjangState extends State<Keranjang> {
                                                                     .ellipsis,
                                                             maxLines: 2,
                                                           ),
+                                                          SizedBox(height: 4,),
                                                           Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              FutureBuilder<
-                                                                  GetKategoriById>(
-                                                                future: JsonFuture()
-                                                                    .getKategoriById(
-                                                                  id: keranjang
-                                                                      .product!
-                                                                      .categoryId
-                                                                      .toString(),
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  if (snapshot
-                                                                          .hasData &&
-                                                                      snapshot.connectionState !=
-                                                                          ConnectionState
-                                                                              .waiting &&
-                                                                      snapshot.data !=
-                                                                          null &&
-                                                                      snapshot.data!
-                                                                              .data !=
-                                                                          null) {
-                                                                    return Text(
-                                                                      snapshot
-                                                                              .data!
-                                                                              .data!
-                                                                              .name ??
-                                                                          'No Kategori',
-                                                                      style: Font
-                                                                          .style(
-                                                                        fontSize:
-                                                                            12,
-                                                                      ),
-                                                                    );
-                                                                  } else {
-                                                                    return Text(
-                                                                      'Waiting..',
-                                                                      style: Font.style(
-                                                                          fontSize:
-                                                                              12),
-                                                                    );
-                                                                  }
-                                                                },
-                                                              ),
+                                                              Text(
+                                                            rupiah(
+                                                              keranjang.product!
+                                                                  .harga!,
+                                                            ),
+                                                            style: Font.style(
+                                                                color: Colors.red,
+                                                                fontSize: 17),
+                                                          ),
                                                               Text(
                                                                 "${keranjang.qty!} pcs",
                                                                 style:
@@ -229,57 +233,52 @@ class _KeranjangState extends State<Keranjang> {
                                                               ),
                                                             ],
                                                           ),
-                                                          Text(
-                                                            rupiah(
-                                                              keranjang.product!
-                                                                  .harga!,
-                                                            ),
-                                                            style: Font.style(
-                                                                color: Warna()
-                                                                    .font,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 17),
-                                                          ),
+                                                          
                                                         ],
                                                       ),
                                                     ),
                                                   ),
-                                                  IconButton(
-                                                    icon: const Icon(
-                                                      Icons
-                                                          .delete_outline_rounded,
-                                                      color: Colors.grey,
-                                                      size: 25,
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius: BorderRadius.circular(45),
                                                     ),
-                                                    onPressed: () async {
-                                                      DeleteKeranjang
-                                                          deleteKeranjang =
-                                                          await JsonFuture()
-                                                              .deleteKeranjang(
-                                                        id: keranjang.id!
-                                                            .toString(),
-                                                      );
-                                                      if (deleteKeranjang
-                                                              .code ==
-                                                          '00') {
-                                                        cart.removecart = 1;
-                                                        await Notifikasi.notif(
-                                                            title:
-                                                                'Hapus Keranjang',
-                                                            body:
-                                                                deleteKeranjang
-                                                                    .info!);
-                                                      }
-                                                      snackBar(
-                                                        context,
-                                                        text: deleteKeranjang
-                                                                .info ??
-                                                            "TERJADI KESALAHAN",
-                                                      );
-                                                      setState(() {});
-                                                    },
+                                                    
+                                                    child: IconButton(
+                                                      icon: const Icon(
+                                                        Icons
+                                                            .delete_forever,
+                                                        color: Colors.white,
+                                                        size: 25,
+                                                      ),
+                                                      onPressed: () async {
+                                                        DeleteKeranjang
+                                                            deleteKeranjang =
+                                                            await JsonFuture()
+                                                                .deleteKeranjang(
+                                                          id: keranjang.id!
+                                                              .toString(),
+                                                        );
+                                                        if (deleteKeranjang
+                                                                .code ==
+                                                            '00') {
+                                                          cart.removecart = 1;
+                                                          await Notifikasi.notif(
+                                                              title:
+                                                                  'Hapus Keranjang',
+                                                              body:
+                                                                  deleteKeranjang
+                                                                      .info!);
+                                                        }
+                                                        snackBar(
+                                                          context,
+                                                          text: deleteKeranjang
+                                                                  .info ??
+                                                              "TERJADI KESALAHAN",
+                                                        );
+                                                        setState(() {});
+                                                      },
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -327,7 +326,7 @@ class _KeranjangState extends State<Keranjang> {
                                         rupiah(total),
                                         style: Font.style(
                                           fontWeight: FontWeight.bold,
-                                          color: Warna().font,
+                                          color: Colors.red,
                                           fontSize: 17,
                                         ),
                                       ),
@@ -339,16 +338,10 @@ class _KeranjangState extends State<Keranjang> {
                                       onPressed: () {
                                         Navigator.push(
                                           context,
-                                          WaveTransition(
-                                            duration: const Duration(
-                                                milliseconds: 700),
-                                            child: PembayaranPage(
+                                          PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: PembayaranPage(
                                                 dataKeranjang:
                                                     snapshotGetKeranjang.data!,
-                                                total: total),
-                                            center:
-                                                const FractionalOffset(0.5, 0),
-                                          ),
+                                                total: total),),
                                         );
                                       },
                                       style: ButtonStyle(
@@ -359,13 +352,7 @@ class _KeranjangState extends State<Keranjang> {
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
                                                 Warna().icon),
-                                        shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                          ),
-                                        ),
+                                        
                                       ),
                                       child: Text(
                                         "Beli Semua",

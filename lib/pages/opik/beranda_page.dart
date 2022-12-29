@@ -177,6 +177,7 @@ class Beranda extends StatelessWidget {
                                       style: Font.style(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
+                                        color: Colors.red,
                                       ),
                                       maxLines: 1,
                                     ),
