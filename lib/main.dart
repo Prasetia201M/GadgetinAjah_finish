@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:gadgetinaja/pages/roni/splashscreen.dart';
+import 'package:gadgetinaja/Login/splashscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:gadgetinaja/services/local_storages.dart';
 import 'package:gadgetinaja/services/styles.dart';
